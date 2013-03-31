@@ -8,7 +8,7 @@ describe('KnockoutJS-Wait', function() {
     container.appendTo('body');
     slow_container.appendTo('body');
 
-    slow_runner = new SlowRunnerViewModel()
+    slow_runner = new SlowRunnerViewModel();
 
     ko.applyBindings(slow_runner);
   });
@@ -18,7 +18,7 @@ describe('KnockoutJS-Wait', function() {
     slow_container.remove();
   });
 
-  describe('Configuration', function () {
+  describe('Configuration', function() {
     it('has no content by default', function() {
       expect(container.html()).toBe('0');
     });
@@ -29,7 +29,7 @@ describe('KnockoutJS-Wait', function() {
       expect(slow_container.html()).toBe('5');
     });
 
-    it('has a synchronisation problem', function() {
+    it('has a synchronisation problem when modifying HTML', function() {
       container.html('5');
       expect(container.html()).toBe('5');
       expect(slow_container.html()).toBe('0');
