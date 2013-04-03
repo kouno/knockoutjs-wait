@@ -58,6 +58,21 @@ describe('KnockoutJS-Wait', function() {
         expect(slow_runner.count()).toBe('5');
         expect(slow_runner.slow_count()).toBe('5');
       });
-    })
+    });
+  });
+
+  describe('Callbacks', function() { 
+    it('has a setter input for the count', function() {
+      runs(function() {
+        count_setter.val('5').change();
+        expect(ko.bindingsApplied).toBeFalsy();
+      });
+
+      waits(50);
+
+      runs(function() {
+        expect(ko.bindingsApplied).toBeTruthy();
+      });
+    });
   });
 });
