@@ -59,10 +59,28 @@ describe('KnockoutJS-Wait', function() {
         expect(slow_runner.slow_count()).toBe('5');
       });
     });
+
+    it('has a setter input for the count (rewritten)', function() {
+      runs(function() {
+        count_setter.val('5').change();
+
+        expect(slow_runner.count()).toBe('5');
+        expect(slow_runner.slow_count()).toBe(0);
+      });
+
+      waitsFor(function () {
+        return slow_runner.slow_count() != 0;
+      }, 'slow_count never changed its value', 100);
+
+      runs(function() {
+        expect(slow_runner.count()).toBe('5');
+        expect(slow_runner.slow_count()).toBe('5');
+      });
+    });
   });
 
   describe('Callbacks', function() { 
-    it('has a setter input for the count', function() {
+    xit('has a setter input for the count', function() {
       runs(function() {
         count_setter.val('5').change();
         expect(ko.bindingsApplied).toBeFalsy();
@@ -74,5 +92,7 @@ describe('KnockoutJS-Wait', function() {
         expect(ko.bindingsApplied).toBeTruthy();
       });
     });
+
+    it('mirrors knockout callback state');
   });
 });
